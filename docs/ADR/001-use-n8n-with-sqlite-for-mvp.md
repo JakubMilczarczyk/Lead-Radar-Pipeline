@@ -1,9 +1,19 @@
-## __Status:__ Accepted
+# ADR [Number]: [Short decision title]
 
-## __Contect:__ Need to quickly impement ETL piepine MVP for notification logic.
+**Date:** [YYYY-MM-DD]
+**Status:** Accepted
 
-## __Decision:__ Using n8n with a buit-in SQLite database.
+## Context
+Need to quickly impement ETL piepine MVP for notification logic.
 
-## __Consequences (Positive):__ Lightning-fast start, no additional container (PostgreSQL), minimal memory consumption (FinOps).
+## Decision
+Using n8n with a buit-in SQLite database.
 
-## __Consequences (Negative):__ More difficult to scale if moving to a multi-node model in the future.
+## Consequences
+**Positive:**
+* Lightning-fast start
+* no additional container (PostgreSQL)
+* minimal memory consumption (FinOps)
+
+**Negative** 
+* More difficult to scale if moving to a multi-node model in the future.

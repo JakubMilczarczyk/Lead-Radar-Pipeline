@@ -1,9 +1,19 @@
-## __Status:__ 
+# ADR [Number]: [Short decision title]
 
-## __Contect:__ 
+**Date:** [YYYY-MM-DD]
+**Status:** [Accepted / Proposed / Rejected]
 
-## __Decision:__ 
+## Context
+[Short describe. Why this decision must be taken?]
 
-## __Consequences (Positive):__ 
+## Decision
+[Describe decision in strict, short way.]
 
-## __Consequences (Negative):__ 
+## Consequences
+**Positive:**
+* [plus 1]
+* [plus 2]
+
+**Negative / Risks:**
+* [minus / risk 1]
+* [minus / risk 2]

@@ -1,7 +1,7 @@
-# LEAD RADAR
+# Cloud Bridge Engine
 
 ## Traget
-**A hermetic B2B/Freelance customer acquisition engine based on Event-Driven architecture.**
+**A hermetic customer acquisition engine based on Event-Driven architecture.**
 
 ## Tech Stack
 * OCI (Ampere)
