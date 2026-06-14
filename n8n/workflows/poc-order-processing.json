@@ -1,0 +1,129 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7debde40-67e5-4a4a-940f-d36f162368f5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "73d311e9-8c9a-4de7-bfc2-47bdf57967b0",
+      "name": "Webhook",
+      "webhookId": "7debde40-67e5-4a4a-940f-d36f162368f5"
+    },
+    {
+      "parameters": {
+        "url": "https://api.nbp.pl/api/exchangerates/rates/a/eur/?format=json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "1ff5065f-4e1a-4268-af27-b4f1ebd593aa",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e281c3d4-5ac8-4ca1-b9ff-932d1489c15b",
+              "name": "discord_message",
+              "value": "=Order ID: {{ $('Webhook').item.json.body.order_id }}\nClient: {{ $('Webhook').item.json.body.customer_name }} (NIP: {{ $('Webhook').item.json.body.company_nip }})\nBase Amount: {{ $('Webhook').item.json.body.amount_pln }} PLN\nActual Rate EUR: {{ $json.rates[0].mid }} PLN\n\nEstimated Value: {{ ($('Webhook').item.json.body.amount_pln / $json.rates[0].mid).toFixed(2) }} EUR",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "b9d03378-07cd-4eef-85b4-1896b1fa3e97",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "={{ $json.discord_message }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "ca78c1f5-5639-47fb-b1cf-2f1f492523db",
+      "name": "Discord",
+      "webhookId": "e43c652b-68c5-453b-8af0-ba9a3ca6dd4f",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "woViQQxahbQx6aNf",
+          "name": "Discord Webhook account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Discord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "96f958c8-bdd0-4fdd-ba70-2f8306e5684a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b4908c125990c6e1c19b619d1dec08a98f5557a268796fe7a5ac5c52dc01d3bc"
+  },
+  "nodeGroups": [],
+  "id": "RlMxXnKCKdoMq3X2",
+  "tags": []
+}
